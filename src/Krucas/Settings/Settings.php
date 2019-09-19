@@ -79,6 +79,9 @@ class Settings implements Repository
      */
     protected $valueSerializer;
 
+
+    protected $serializeEnabled;
+
     /**
      * Create new settings.
      *
@@ -236,6 +239,33 @@ class Settings implements Repository
     }
 
     /**
+     * Enable events.
+     *
+     * @return void
+     */
+    public function enableSerialize()
+    {
+        $this->serializeEnabled = true;
+    }
+
+    /**
+     * Disable events.
+     *
+     * @return void
+     */
+    public function disableSerialize()
+    {
+        $this->serializeEnabled = false;
+    }
+
+
+    public function isSerializeEnabled()
+    {
+        return $this->serializeEnabled;
+    }
+
+
+    /**
      * Set events dispatcher.
      *
      * @param \Illuminate\Contracts\Events\Dispatcher $dispatcher
@@ -322,7 +352,10 @@ class Settings implements Repository
         }
 
         if (!is_null($value)) {
-            $value = $this->unserializeValue($this->isEncryptionEnabled() ? $this->encrypter->decrypt($value) : $value);
+            $value = $this->isEncryptionEnabled() ? $this->encrypter->decrypt($value) : $value;
+            if ($this->isSerializeEnabled()) {
+                $value = $this->unserializeValue($value);
+            }
         } else {
             $value = $default;
         }
@@ -347,11 +380,13 @@ class Settings implements Repository
 
         $generatedKey = $this->getKey($key);
 
-        $serializedValue = $this->serializeValue($value);
+        if ($this->isSerializeEnabled()) {
+            $value = $this->serializeValue($value);
+        }
 
         $this->repository->set(
             $generatedKey,
-            $this->isEncryptionEnabled()? $this->encrypter->encrypt($serializedValue) : $serializedValue
+            $this->isEncryptionEnabled()? $this->encrypter->encrypt($value) : $value
         );
 
         if ($this->isCacheEnabled()) {
@@ -394,7 +429,11 @@ class Settings implements Repository
      */
     protected function getKey($key)
     {
-        return $this->keyGenerator->generate($key, $this->context);
+        if ($this->isSerializeEnabled()) {
+            return $this->keyGenerator->generate($key, $this->context);
+        } else {
+            return $key;
+        }
     }
 
     /**

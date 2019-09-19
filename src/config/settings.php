@@ -23,7 +23,7 @@ return [
     | If it is enabled all values gets cached after accessing it.
     |
     */
-    'cache' => true,
+    'cache' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -114,5 +114,8 @@ return [
     'override' => [
 
     ],
+
+
+    'serialize' => true,
 
 ];

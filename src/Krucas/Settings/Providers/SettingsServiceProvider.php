@@ -105,6 +105,7 @@ class SettingsServiceProvider extends ServiceProvider
             $app['config']['settings.cache'] ? $settings->enableCache() : $settings->disableCache();
             $app['config']['settings.encryption'] ? $settings->enableEncryption() : $settings->disableEncryption();
             $app['config']['settings.events'] ? $settings->enableEvents() : $settings->disableEvents();
+            $app['config']['settings.serialize'] ? $settings->enableSerialize() : $settings->disableSerialize();
 
             return $settings;
         });
