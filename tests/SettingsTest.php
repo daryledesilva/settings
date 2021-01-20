@@ -228,6 +228,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('value', $settings->get('key', 'default'));
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetSetsValueToRepository()
     {
         $g = $this->getKeyGeneratorMock();
@@ -244,6 +247,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetUsesEncrypter()
     {
         $g = $this->getKeyGeneratorMock();
@@ -265,6 +271,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetSkipsEncrypter()
     {
         $g = $this->getKeyGeneratorMock();
@@ -286,6 +295,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetUsesCache()
     {
         $g = $this->getKeyGeneratorMock();
@@ -307,6 +319,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetSkipsCache()
     {
         $g = $this->getKeyGeneratorMock();
@@ -328,6 +343,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetFiresEvents()
     {
         $context = new \Krucas\Settings\Context();
@@ -352,6 +370,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->context($context)->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetSkipsEvents()
     {
         $g = $this->getKeyGeneratorMock();
@@ -373,6 +394,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->set('key', 'value');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testForgetForgetsRepositoryValue()
     {
         $g = $this->getKeyGeneratorMock();
@@ -388,6 +412,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->forget('key');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testForgetUsesCache()
     {
         $g = $this->getKeyGeneratorMock();
@@ -408,6 +435,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->forget('key');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testForgetSkipsCache()
     {
         $g = $this->getKeyGeneratorMock();
@@ -428,6 +458,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->forget('key');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testForgetFiresEvents()
     {
         $context = new \Krucas\Settings\Context();
@@ -451,6 +484,9 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $settings->context($context)->forget('key');
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testForgetSkipsEvents()
     {
         $g = $this->getKeyGeneratorMock();

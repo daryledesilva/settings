@@ -37,11 +37,9 @@ class ContextTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($context->has('test'));
     }
 
-    /**
-     * @expectedException \OutOfBoundsException
-     */
     public function testGetUndefinedContextArgument()
     {
+        $this->expectException(\OutOfBoundsException::class);
         $context = new \Krucas\Settings\Context();
         $context->get('test');
     }
