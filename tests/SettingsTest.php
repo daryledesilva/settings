@@ -36,8 +36,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('has')->with('key_g')->andReturn(true);
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.checking: key', ['key', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.has: key', ['key', true, $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.checking: key', ['key', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.has: key', ['key', true, $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
 
@@ -57,7 +57,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('has')->with('key_g')->andReturn(true);
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
 
@@ -194,8 +194,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('get')->once()->with('key_g', 'default')->andReturn('serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.getting: key', ['key', 'default', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.get: key', ['key', 'value', 'default', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.getting: key', ['key', 'default', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.get: key', ['key', 'value', 'default', $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('unserialize')->with('serialized')->andReturn('value');
@@ -216,7 +216,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('get')->once()->with('key_g', 'default')->andReturn('serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('unserialize')->with('serialized')->andReturn('value');
@@ -357,8 +357,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('set')->once()->with('key_g', 'serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.setting: key', ['key', 'value', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.set: key', ['key', 'value', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.setting: key', ['key', 'value', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.set: key', ['key', 'value', $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('serialize')->with('value')->andReturn('serialized');
@@ -382,7 +382,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('set')->once()->with('key_g', 'serialized');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
         $valueSerializer->shouldReceive('serialize')->with('value')->andReturn('serialized');
@@ -472,8 +472,8 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('forget')->once()->with('key_g');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->once()->with('settings.forgetting: key', ['key', $context]);
-        $dispatcher->shouldReceive('fire')->once()->with('settings.forget: key', ['key', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.forgetting: key', ['key', $context]);
+        $dispatcher->shouldReceive('dispatch')->once()->with('settings.forget: key', ['key', $context]);
 
         $valueSerializer = $this->getValueSerializerMock();
 
@@ -496,7 +496,7 @@ class SettingsTest extends \PHPUnit\Framework\TestCase
         $mock->shouldReceive('forget')->once()->with('key_g');
 
         $dispatcher = $this->getDispatcherMock();
-        $dispatcher->shouldReceive('fire')->never();
+        $dispatcher->shouldReceive('dispatch')->never();
 
         $valueSerializer = $this->getValueSerializerMock();
 
